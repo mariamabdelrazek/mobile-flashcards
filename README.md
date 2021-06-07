@@ -1,5 +1,6 @@
-# My Universal React Project
+# Mobile Flash Cards Project
 
+- This is a project for the Udacity React Nanodegree Program.
 <p>
   <!-- iOS -->
   <a href="https://itunes.apple.com/app/apple-store/id982107779">
