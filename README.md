@@ -1,6 +1,5 @@
 # Mobile Flash Cards Project
 
-- This is a project for the Udacity React Nanodegree Program.
 <p>
   <!-- iOS -->
   <a href="https://itunes.apple.com/app/apple-store/id982107779">
@@ -15,6 +14,9 @@
     <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
   </a>
 </p>
+
+- This is a project for the Udacity React Nanodegree Program.
+- Tested on Android
 
 ## 🚀 How to use
 
