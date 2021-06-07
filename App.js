@@ -22,6 +22,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import Quiz from "./components/Quiz";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -32,6 +33,8 @@ function MyStacks() {
       <Stack.Screen name="Decks" component={DeckList} />
       <Stack.Screen name="DeckDetails" component={DeckDetails} />
       <Stack.Screen name="AddCard" component={AddCard} />
+      <Stack.Screen name="Quiz" component={Quiz} />
+      <Stack.Screen name="Add Deck" component={AddDeck} />
     </Stack.Navigator>
   );
 }
@@ -47,14 +50,9 @@ function MyTabs() {
 export default function App() {
   return (
     <Provider store={createStore(reducer)}>
-      {/* <View> */}
-      {/* <DeckList /> */}
-      {/* <Text>boooooooo</Text> */}
       <NavigationContainer>
         <MyTabs />
-        {/* <MyStacks /> */}
       </NavigationContainer>
-      {/* </View> */}
     </Provider>
   );
 }

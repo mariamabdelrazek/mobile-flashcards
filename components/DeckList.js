@@ -1,18 +1,10 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { receiveDecks } from "../actions";
 import { getDecks } from "../utils/api";
-import { AppLoading } from "expo";
-import { purple } from "../utils/colors";
-// import { NavigationContainer } from "@react-navigation/native";
+// import { AppLoading } from "expo";
+import { pink, blue, lightPink, gray } from "../utils/colors";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -25,25 +17,23 @@ class DeckList extends Component {
 
     getDecks()
       .then((decks) => {
-        console.log(decks);
         dispatch(receiveDecks(decks));
       })
       .then(() => this.setState(() => ({ ready: true })));
   }
 
   render() {
-    console.log(this.props);
     const { decks } = this.props;
-    if (this.state.ready === false) {
-      // return <AppLoading />;
-    }
+    // if (this.state.ready === false) {
+    //   return <AppLoading />;
+    // }
 
     return (
       <ScrollView>
         {Object.keys(decks).map((title) => {
-          console.log(decks, title);
           return (
             <TouchableOpacity
+              style={styles.item}
               key={title}
               onPress={() =>
                 this.props.navigation.navigate("DeckDetails", {
@@ -66,21 +56,20 @@ class DeckList extends Component {
 }
 const styles = StyleSheet.create({
   item: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    borderColor: purple,
-    padding: 10,
+    margin: 15,
+    borderColor: gray,
+    padding: 5,
     borderWidth: 2,
     borderRadius: 5,
+    // backgroundColor: lightPink,
   },
   heading: {
     marginTop: 15,
     fontWeight: "600",
     marginBottom: 15,
-    fontSize: 22,
+    fontSize: 25,
     textAlign: "center",
+    color: blue,
   },
   subheading: {
     marginBottom: 15,

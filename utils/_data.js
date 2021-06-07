@@ -22,10 +22,6 @@ const defaultDecks = {
       },
     ],
   },
-  Redux: {
-    title: "Redux",
-    questions: [],
-  },
   ReactNative: {
     title: "ReactNative",
     questions: [],

@@ -9,12 +9,12 @@ import {
 import { connect } from "react-redux";
 import { addCard } from "../actions";
 import { submitCard } from "../utils/api";
-import { purple, white } from "../utils/colors";
+import { purple, white, green } from "../utils/colors";
 
 const SubmitButton = ({ onPress, disabled }) => {
   return (
     <TouchableOpacity
-      style={[styles.androidSubmitButton, disabled && styles.disabled]}
+      style={[styles.submitButton, disabled && styles.disabled]}
       onPress={onPress}
       disabled={disabled}
     >
@@ -43,15 +43,12 @@ class AddCard extends Component {
     const { question, answer, deckTitle } = this.state;
     const card = { question, answer };
 
-    //  Reset state
     this.setState(() => ({
       question: "",
       answer: "",
     }));
 
-    // Save card in local storage
     submitCard(card, deckTitle);
-    console.log(this.state, card, deckTitle);
 
     this.props.dispatch(addCard(card, deckTitle));
 
@@ -69,7 +66,7 @@ class AddCard extends Component {
           style={styles.input}
           onChangeText={(question) => this.setState({ question })}
           value={this.state.question}
-          placeholder={"Add a question"}
+          placeholder={"Question"}
           placeholderTextColor={purple}
         />
         <TextInput
@@ -78,7 +75,7 @@ class AddCard extends Component {
           style={styles.input}
           onChangeText={(answer) => this.setState({ answer })}
           value={this.state.answer}
-          placeholder={"Add the answer"}
+          placeholder={"Answer"}
           placeholderTextColor={purple}
         />
         <SubmitButton
@@ -90,32 +87,26 @@ class AddCard extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  const { deckTitle, deckColor } = props.route.params;
-
-  return {
-    deckTitle,
-    deckColor,
-    goBack: () => props.navigation.goBack(),
-  };
-};
-
 const styles = StyleSheet.create({
   container: {
     flexWrap: "wrap",
     justifyContent: "center",
     padding: 10,
     height: "100%",
+    alignItems: "center",
+    flex: 1,
   },
   input: {
     height: 80,
     margin: 10,
     fontSize: 22,
+    padding: 10,
     backgroundColor: white,
-    opacity: 0.7,
+    width: "80%",
+    borderWidth: 1,
   },
-  androidSubmitButton: {
-    backgroundColor: purple,
+  submitButton: {
+    backgroundColor: green,
     padding: 10,
     borderRadius: 5,
     height: 45,
@@ -133,5 +124,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+const mapStateToProps = (state, props) => {
+  const { deckTitle, deckColor } = props.route.params;
+
+  return {
+    deckTitle,
+    deckColor,
+    goBack: () => props.navigation.goBack(),
+  };
+};
 
 export default connect(mapStateToProps)(AddCard);

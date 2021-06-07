@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
-import { gray, blue, white, green } from "../utils/colors";
-// import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
+import { black, blue, white, green, purple } from "../utils/colors";
 
 class DeckDetails extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -14,50 +13,49 @@ class DeckDetails extends Component {
     };
   };
   render() {
-    console.log(this.props);
     const { deck } = this.props;
     return (
       <View style={[styles.container]}>
         <View style={styles.details}>
           <Text style={styles.title}>{deck.title}</Text>
-          <Text style={styles.total}>{deck.questions.length} card(s)</Text>
+          <Text style={styles.totalNumber}>
+            {deck.questions.length} card(s)
+          </Text>
         </View>
         <View style={styles.row}>
           <TouchableOpacity
-            style={styles.add}
+            style={styles.buttonContainer}
             onPress={() =>
               this.props.navigation.navigate("AddCard", {
                 deckTitle: deck.title,
-                deckColor: deck.color,
               })
             }
           >
-            <View style={[styles.iconContainer, { backgroundColor: green }]}>
+            <View>
               <MaterialIcons
                 name="note-add"
-                style={{ color: white }}
+                style={{ color: green }}
                 size={35}
               />
             </View>
-            <Text style={styles.add}>Add new card</Text>
+            <Text style={styles.add}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.start}
-            // onPress={() => {
-            //   clearLocalNotification().then(setLocalNotification)
-            //   this.props.navigation.navigate("Quiz", {
-            //     deck: deck
-            //   })
-            // }}
+            style={styles.buttonContainer}
+            onPress={() => {
+              this.props.navigation.navigate("Quiz", {
+                deck: deck,
+              });
+            }}
           >
-            <View style={[styles.iconContainer, { backgroundColor: blue }]}>
+            <View>
               <MaterialIcons
                 name="play-arrow"
-                style={{ color: white }}
+                style={{ color: black }}
                 size={35}
               />
             </View>
-            <Text style={styles.start}>Start Quiz</Text>
+            <Text style={styles.start}>Start a Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -69,26 +67,28 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     justifyContent: "space-around",
+    flex: 1,
   },
   details: {
     alignSelf: "center",
   },
   title: {
-    fontSize: 50,
+    fontSize: 42,
+    fontWeight: "bold",
+    marginBottom: 20,
     textAlign: "center",
   },
-  total: {
-    fontSize: 20,
+  totalNumber: {
+    fontSize: 18,
     textAlign: "center",
-    color: gray,
+    color: purple,
   },
   row: {
-    flexDirection: "row",
     justifyContent: "space-around",
   },
   add: { color: green, fontSize: 25, alignItems: "center" },
   start: {
-    color: blue,
+    color: black,
     fontSize: 25,
     alignItems: "center",
   },
@@ -97,6 +97,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 50,
     height: 50,
+  },
+  buttonContainer: {
+    borderRadius: 4,
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
   },
 });
 

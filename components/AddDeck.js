@@ -9,16 +9,16 @@ import {
 import { submitDeck } from "../utils/api";
 import { connect } from "react-redux";
 import { addDeck } from "../actions";
-import { purple, white, gray } from "../utils/colors";
+import { purple, white, gray, green } from "../utils/colors";
 
 const SubmitButton = ({ onPress, disabled }) => {
   return (
     <TouchableOpacity
-      style={[styles.androidSubmitButton, disabled && styles.disabled]}
+      style={[styles.submitButton, disabled && styles.disabled]}
       onPress={onPress}
       disabled={disabled}
     >
-      <Text style={styles.submitBtnText}>SUBMIT</Text>
+      <Text style={styles.submitBtnText}>Create Deck</Text>
     </TouchableOpacity>
   );
 };
@@ -32,24 +32,24 @@ class AddDeck extends Component {
   submit = () => {
     const deck = this.state;
 
-    // Reset state
     this.setState(() => ({
       title: "",
       color: gray,
     }));
 
-    // Save deck in local storage
     submitDeck(deck);
 
     this.props.dispatch(addDeck(deck));
 
-    this.props.goBack();
+    this.props.navigation.navigate("DeckDetails", {
+      title: deck.title,
+    });
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.description}>
+        <Text style={styles.pageDescription}>
           What is the title of your new deck?
         </Text>
         <TextInput
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     padding: 10,
     height: "100%",
   },
-  description: {
-    fontSize: 25,
+  pageDescription: {
+    fontSize: 20,
     margin: 10,
   },
   input: {
@@ -89,14 +89,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: purple,
     borderRadius: 6,
+    width: "80%",
+    padding: 10,
   },
-  androidSubmitButton: {
-    backgroundColor: purple,
+  submitButton: {
+    backgroundColor: green,
     padding: 10,
     borderRadius: 5,
     height: 45,
     margin: 10,
-    alignSelf: "flex-end",
+    alignSelf: "flex-start",
     justifyContent: "center",
     alignItems: "center",
   },
